@@ -90,6 +90,17 @@ example image and example reference
 This is a subpage
 
 
+# Include from seperate file
+
+{{< include content/_seperate_file.qmd >}}
+
+
+## Including a seperate file in a codeblock
+```md
+{{< include content/_seperate_file.qmd >}}
+```
+
+
 # Autoanimate {auto-animate="true"}
 - **Test**
 

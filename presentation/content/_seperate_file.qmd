@@ -1,0 +1,9 @@
+## Seperate file
+
+This is content imported from a **seperate file**
+
+use `{{< include content/_seperate_file.qmd >}}` to import this file.
+
+<!-- 
+Note that we use an underscore (_) prefix for the included files. You should always use an underscore prefix with included files so that they are automatically ignored (i.e. not treated as standalone files) by a quarto render of a project.
+-->
