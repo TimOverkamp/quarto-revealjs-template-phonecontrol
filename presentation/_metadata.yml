@@ -1,0 +1,46 @@
+bibliography: references.bib
+csl: ieee-access.csl
+
+format:
+  revealjs:
+    multiplex: true
+    embed-resources: true
+    navigation-mode: linear
+    transition: slide
+    transition-speed: fast
+    auto-animate-duration: 0.2
+    auto-animate-easing: ease-out
+    slide-number: h.v
+    css: custom.css
+    include-after-body:
+      - text: |
+          <script>
+          (function() {
+            var isSpeaker = window.location.href.includes('-speaker.html') || window.location.search.includes('speaker');
+            if (isSpeaker) document.body.classList.add('is-speaker');
+            if (!isSpeaker) return;
+            
+            function init() {
+              Reveal.configure({ showNotes: true });
+              
+              var timer = document.createElement('div');
+              timer.id = 'speaker-timer';
+              timer.textContent = '00:00';
+              document.body.appendChild(timer);
+              
+              var start = Date.now();
+              setInterval(function() {
+                var s = Math.floor((Date.now() - start) / 1000);
+                var m = Math.floor(s / 60);
+                timer.textContent = (m < 10 ? '0' : '') + m + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+              }, 1000);
+            }
+            
+            if (Reveal.isReady()) init(); else Reveal.on('ready', init);
+          })();
+          </script>
+      - text: |
+          <div id="scroll-nav">
+            <button onclick="Reveal.prev()">↑</button>
+            <button onclick="Reveal.next()">↓</button>
+          </div>
