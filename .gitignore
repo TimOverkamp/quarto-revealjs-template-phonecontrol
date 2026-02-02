@@ -4,3 +4,7 @@
 */*_files/
 */.quarto/
 */_site/
+
+# Generated presentation files
+presentation/presentation.html
+presentation/presentation-speaker.html
