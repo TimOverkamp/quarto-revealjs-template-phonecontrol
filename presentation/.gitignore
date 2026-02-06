@@ -1,0 +1,11 @@
+/.quarto/
+**/*.quarto_ipynb
+
+*/*_files/
+*/.quarto/
+*/_site/
+
+# Generated files
+*.html
+!index.html
+!index-no-multiplex.html
