@@ -18,20 +18,25 @@ This template includes a GitHub Actions workflow that automatically builds and d
 
 ### How it works
 
-1. When you push to `main`, the workflow:
-   - Compiles the Quarto presentation to HTML
-   - Deploys the output to the `gh-pages` branch
+1. **On push to `main`**:
+   - The workflow compiles the presentation and uploads it as an artifact to verify the build.
+   - It does **not** deploy to GitHub Pages.
 
-2. The generated HTML files are **not** tracked in source control (see `.gitignore`), keeping the repository small and the single source of truth in the `.qmd` files.
+2. **On pushing a tag** (e.g. `v1.0.0`):
+   - The workflow compiles the presentation.
+   - It deploys the presentation to GitHub Pages.
 
 ### Setup for your fork
 
 1. Go to your repository's **Settings** → **Pages**
 2. Under **Build and deployment**, set:
-   - **Source**: `Deploy from a branch`
-   - **Branch**: `gh-pages` / `/ (root)`
+   - **Source**: `GitHub Actions`
 3. Click **Save**
-4. Push a commit to trigger the workflow, or manually run it via **Actions** → **Build and Deploy Presentation** → **Run workflow**
+4. To deploy, create and push a tag (must match `v*.*.*`):
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
 5. Your presentation will be available at `https://<username>.github.io/<repo-name>/`
 
 ## Disclaimer

@@ -1,0 +1,58 @@
+name: Build and Deploy Presentation
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - "v*.*.*"
+    paths:
+      - presentation/**
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render Presentation
+        working-directory: ./presentation
+        run: quarto render presentation.qmd
+
+      - name: Prepare Deployment Directory
+        working-directory: ./presentation
+        run: |
+          mkdir -p public/
+          cp *.html public/
+          
+          # Copy assets and custom CSS if they exist
+          if [ -d "assets" ]; then
+            cp -r assets public/
+          fi
+          if [ -f "custom.css" ]; then
+            cp custom.css public/
+          fi
+          
+          echo "Files being deployed:"
+          ls -R public/
+
+      - name: Upload Presentation as Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: presentation
+          path: presentation/public
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        # Only if tag is pushed
+        if: github.event_name == 'push' && github.ref_type == 'tag'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./presentation/public
+          
