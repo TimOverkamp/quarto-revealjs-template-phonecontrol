@@ -32,12 +32,15 @@ This template includes a GitHub Actions workflow that automatically builds and d
 2. Under **Build and deployment**, set:
    - **Source**: `GitHub Actions`
 3. Click **Save**
-4. To deploy, create and push a tag (must match `v*.*.*`):
+4. Configure environment protection rules to allow tags:
+   - Go to **Settings** → **Environments** → **github-pages**
+   - Under **Deployment branches and tags**, click **Add deployment branch or tag rule** and add `v*.*.*` (or change to *Allow all branches and tags*).
+5. To deploy, create and push a tag (must match `v*.*.*`):
    ```bash
    git tag v1.0.0
    git push origin v1.0.0
    ```
-5. Your presentation will be available at `https://<username>.github.io/<repo-name>/`
+6. Your presentation will be available at `https://<username>.github.io/<repo-name>/`
 
 ## Disclaimer
 
